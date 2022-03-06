@@ -1,7 +1,6 @@
 package dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -14,21 +13,18 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springblade.core.mp.base.BaseEntity;
 
-import javax.validation.constraints.NotBlank;
-import java.math.BigDecimal;
+import java.util.Date;
 
-import static com.baomidou.mybatisplus.annotation.FieldStrategy.IGNORED;
-import static com.baomidou.mybatisplus.annotation.FieldStrategy.NOT_EMPTY;
 
 /**
- *
  * @author will
  */
 @Data
-@ApiModel(description = "剪发卡")
+@Builder
+@ApiModel(description = "会员表")
 @EqualsAndHashCode(callSuper = true)
 @TableName("haircut")
-public class Haircut extends BaseEntity {
+public class MemberUser extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,31 +33,19 @@ public class Haircut extends BaseEntity {
     @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
     private Long id;
 
-    @ApiModelProperty(value = "会员id")
-    @TableField(updateStrategy = IGNORED, whereStrategy = NOT_EMPTY)
-    @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
-    private Long memberUserId;
-
     @ApiModelProperty(value = "会员姓名")
     private String MemberUserName;
 
     @ApiModelProperty(value = "会员手机号")
     private Integer phoneNum;
 
+    @ApiModelProperty(value = "生日")
+    private Date birthday;
 
-    @ApiModelProperty(value = "剪发卡充值金额")
-    private BigDecimal haircutRechargeAmount;
+    @ApiModelProperty(value ="家庭住址")
+    private String address;
 
-    @ApiModelProperty(value = "剪发总次数")
-    @JsonSerialize(nullsUsing = NullSerializer.class)
-    @NotBlank
-    private Integer totalTime;
-
-    @ApiModelProperty(value = "剩余剪发总次数")
-    @JsonSerialize(nullsUsing = NullSerializer.class)
-    private Integer remainingTime;
-
-    @ApiModelProperty(value = "备注")
+    @ApiModelProperty(value = "备注信息")
     private String remark;
 
 }

@@ -12,6 +12,6 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Builder
-@ApiModel(value = "RegisterVO对象", description = "注册表对象")
+@ApiModel(value = "剪发卡查询vo", description = "剪发卡查询vo")
 public class HaircutVo extends Haircut {
 }

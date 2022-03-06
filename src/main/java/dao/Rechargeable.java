@@ -1,6 +1,7 @@
 package dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -13,6 +14,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springblade.core.mp.base.BaseEntity;
 
+import static com.baomidou.mybatisplus.annotation.FieldStrategy.IGNORED;
+import static com.baomidou.mybatisplus.annotation.FieldStrategy.NOT_EMPTY;
+
 /**
  * @author will
  */
@@ -23,13 +27,24 @@ import org.springblade.core.mp.base.BaseEntity;
 @TableName("haircut")
 public class Rechargeable extends BaseEntity {
 
+    private static final long serialVersionUID = 1L;
+
     @ApiModelProperty(value = "ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
     private Long id;
 
-    @ApiModelProperty(value = "用户姓名")
-    private String name;
+    @ApiModelProperty(value = "会员id")
+    @TableField(updateStrategy = IGNORED, whereStrategy = NOT_EMPTY)
+    @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
+    private Long memberUserId;
+
+    @ApiModelProperty(value = "会员姓名")
+    private String MemberUserName;
+
+    @ApiModelProperty(value = "会员手机号")
+    private Integer phoneNum;
+
 
     @ApiModelProperty(value = "充值金额")
     @JsonSerialize(nullsUsing = NullSerializer.class)
@@ -41,9 +56,5 @@ public class Rechargeable extends BaseEntity {
 
     @ApiModelProperty(value = "备注")
     private String remark;
-
-
-
-
 
 }
