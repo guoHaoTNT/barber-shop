@@ -3,15 +3,13 @@ package controller;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import dao.MemberUser;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springblade.core.tool.api.R;
 import org.springblade.core.tool.utils.Func;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import service.MemberUserService;
 
 import java.util.List;
@@ -29,20 +27,64 @@ public class MemberUserController {
     private final MemberUserService memberUserService;
 
     /**
-     * 修改数据需要把信息同步到 剪发卡和充值卡
-     */
-
-    /**
-     * 根据剪发卡信息
+     * 会员卡，手机号和姓名模糊查询
      *
+     * @param name
      * @return
      */
     @ApiOperation(value = "根据剪发卡信息")
-    @GetMapping("/rechargeInfoByPhoneNum/{name}")
-    public R<List<MemberUser>> queryByName(@PathVariable("name") String name) {
-        List<MemberUser> memberUsers = memberUserService.getBaseMapper().selectList(Wrappers.<MemberUser>lambdaQuery()
-                .like(MemberUser::getMemberUserName, name));
-        return R.data(memberUsers);
+    @GetMapping("/rechargeInfoByPhoneNum/{name}/{phone_num}")
+    public R<List<MemberUser>> queryByName(@PathVariable("name") String name, @PathVariable("phone_num") Integer phoneNum) {
+        List<MemberUser> list = memberUserService.list(Wrappers.<MemberUser>lambdaQuery()
+                .like(Func.isNotEmpty(name), MemberUser::getMemberUserName, name)
+                .like(Func.isNotEmpty(phoneNum), MemberUser::getPhoneNum, phoneNum));
+        return R.data(list);
+    }
+
+    /**
+     * 会员保存/修改
+     *
+     * @param memberUser
+     * @return
+     */
+    @ApiModelProperty(value = "会员保存")
+    @PostMapping("/save")
+    public R<String> save(@RequestBody MemberUser memberUser) {
+        //手机号是唯一标识校验
+        List<MemberUser> list = memberUserService.list(Wrappers.<MemberUser>lambdaQuery()
+                .eq(MemberUser::getPhoneNum, memberUser.getPhoneNum()));
+        if (list.size() > 0) {
+            return R.fail("该手机号已经绑定会员，请检查后再次输入");
+        }
+        memberUserService.saveOrUpdate(memberUser);
+        return R.data(memberUser.getId().toString());
+    }
+
+    /**
+     * 根据手机号查询会员信息
+     *
+     * @param phoneNum
+     * @return
+     */
+    @ApiModelProperty(value = "根据手机号查询会员信息")
+    @GetMapping("/queryByPhone/{phone_num}")
+    public R<MemberUser> queryByPhone(@PathVariable("phone_num") Integer phoneNum) {
+        MemberUser memberUser = memberUserService.getOne(Wrappers.<MemberUser>lambdaQuery()
+                .eq(MemberUser::getPhoneNum, phoneNum));
+        return R.data(memberUser);
+    }
+
+    /**
+     * 会员删除
+     *
+     * @param id
+     * @return
+     */
+    @ApiModelProperty(value = "会员删除")
+    @DeleteMapping("/delMemBerUser/{id}")
+    public R<Boolean> delMemBerUser(@PathVariable("id") Long id) {
+        boolean b = memberUserService.removeById(id);
+        return R.data(b);
     }
 
 }
