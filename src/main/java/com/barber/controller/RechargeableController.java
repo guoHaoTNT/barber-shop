@@ -1,7 +1,7 @@
-package controller;
+package com.barber.controller;
 
 
-import dao.Rechargeable;
+import com.barber.dao.Rechargeable;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
@@ -9,7 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springblade.core.tool.api.R;
 import org.springframework.web.bind.annotation.*;
-import service.RechargeableService;
+import com.barber.service.RechargeableService;
 
 import java.util.List;
 

@@ -1,6 +1,7 @@
-package dao;
+package com.barber.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -13,18 +14,18 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springblade.core.mp.base.BaseEntity;
 
-import java.util.Date;
-
+import static com.baomidou.mybatisplus.annotation.FieldStrategy.IGNORED;
+import static com.baomidou.mybatisplus.annotation.FieldStrategy.NOT_EMPTY;
 
 /**
  * @author will
  */
 @Data
 @Builder
-@ApiModel(description = "会员表")
+@ApiModel(description = "充值卡")
 @EqualsAndHashCode(callSuper = true)
-@TableName("haircut")
-public class MemberUser extends BaseEntity {
+@TableName("rechargeable")
+public class Rechargeable extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,19 +34,27 @@ public class MemberUser extends BaseEntity {
     @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
     private Long id;
 
+    @ApiModelProperty(value = "会员id")
+    @TableField(updateStrategy = IGNORED, whereStrategy = NOT_EMPTY)
+    @JsonSerialize(using = ToStringSerializer.class, nullsUsing = NullSerializer.class)
+    private Long memberUserId;
+
     @ApiModelProperty(value = "会员姓名")
-    private String MemberUserName;
+    private String memberUserName;
 
     @ApiModelProperty(value = "会员手机号")
     private Integer phoneNum;
 
-    @ApiModelProperty(value = "生日")
-    private Date birthday;
 
-    @ApiModelProperty(value ="家庭住址")
-    private String address;
+    @ApiModelProperty(value = "充值金额")
+    @JsonSerialize(nullsUsing = NullSerializer.class)
+    private Double rechargeAmount;
 
-    @ApiModelProperty(value = "备注信息")
+    @ApiModelProperty(value = "剩余金额")
+    @JsonSerialize(nullsUsing = NullSerializer.class)
+    private Double remainingAmount;
+
+    @ApiModelProperty(value = "备注")
     private String remark;
 
 }

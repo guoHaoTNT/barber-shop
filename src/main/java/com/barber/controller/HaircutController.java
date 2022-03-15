@@ -1,8 +1,8 @@
-package controller;
+package com.barber.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import dao.Haircut;
-import dao.vo.HaircutQuery;
+import com.barber.dao.Haircut;
+import com.barber.dao.vo.HaircutQuery;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
@@ -11,8 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springblade.core.tool.api.R;
 import org.springblade.core.tool.utils.Func;
 import org.springframework.web.bind.annotation.*;
-import service.HaircutService;
-import service.MemberUserService;
+import com.barber.service.HaircutService;
+import com.barber.service.MemberUserService;
 
 import javax.validation.Valid;
 import java.util.List;

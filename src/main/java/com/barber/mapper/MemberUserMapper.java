@@ -1,7 +1,8 @@
-package mapper;
+package com.barber.mapper;
+
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import dao.MemberUser;
+import com.barber.dao.MemberUser;
 
 /**
  * @author will

@@ -1,7 +1,8 @@
-package controller;
+package com.barber.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import dao.MemberUser;
+import com.barber.dao.MemberUser;
+import com.barber.service.MemberUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
@@ -10,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springblade.core.tool.api.R;
 import org.springblade.core.tool.utils.Func;
 import org.springframework.web.bind.annotation.*;
-import service.MemberUserService;
 
 import java.util.List;
 
@@ -38,6 +38,7 @@ public class MemberUserController {
         List<MemberUser> list = memberUserService.list(Wrappers.<MemberUser>lambdaQuery()
                 .like(Func.isNotEmpty(name), MemberUser::getMemberUserName, name)
                 .like(Func.isNotEmpty(phoneNum), MemberUser::getPhoneNum, phoneNum));
+
         return R.data(list);
     }
 

@@ -1,4 +1,4 @@
-package dao;
+package com.barber.dao;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -9,23 +9,24 @@ import com.fasterxml.jackson.databind.ser.std.NullSerializer;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springblade.core.mp.base.BaseEntity;
+
+import javax.validation.constraints.NotBlank;
 
 import static com.baomidou.mybatisplus.annotation.FieldStrategy.IGNORED;
 import static com.baomidou.mybatisplus.annotation.FieldStrategy.NOT_EMPTY;
 
 /**
+ *
  * @author will
  */
 @Data
-@Builder
-@ApiModel(description = "充值卡")
+@ApiModel(description = "剪发卡")
 @EqualsAndHashCode(callSuper = true)
 @TableName("haircut")
-public class Rechargeable extends BaseEntity {
+public class Haircut extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,19 +41,27 @@ public class Rechargeable extends BaseEntity {
     private Long memberUserId;
 
     @ApiModelProperty(value = "会员姓名")
-    private String MemberUserName;
+    private String memberUserName;
 
     @ApiModelProperty(value = "会员手机号")
     private Integer phoneNum;
 
 
-    @ApiModelProperty(value = "充值金额")
-    @JsonSerialize(nullsUsing = NullSerializer.class)
-    private Double recharge_amount;
+    @ApiModelProperty(value = "剪发卡充值金额")
+    private Double haircutRechargeAmount;
 
-    @ApiModelProperty(value = "剩余金额")
+    @ApiModelProperty(value = "剪发总次数")
     @JsonSerialize(nullsUsing = NullSerializer.class)
-    private Double remaining_amount;
+    @NotBlank
+    private Integer totalTime;
+
+    @ApiModelProperty(value = "剩余剪发总次数")
+    @JsonSerialize(nullsUsing = NullSerializer.class)
+    private Integer remainingTime;
+
+    @ApiModelProperty(value = "是否有效 1-是 0-否")
+    @JsonSerialize(nullsUsing = NullSerializer.class)
+    private Integer valid;
 
     @ApiModelProperty(value = "备注")
     private String remark;

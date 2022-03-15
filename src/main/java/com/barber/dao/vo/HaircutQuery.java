@@ -1,4 +1,4 @@
-package dao.vo;
+package com.barber.dao.vo;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.NullSerializer;
@@ -18,5 +18,5 @@ public class HaircutQuery {
     private Integer phoneNum;
 
     @ApiModelProperty(value = "用户姓名")
-    private String MemberUserName;
+    private String memberUserName;
 }

@@ -1,11 +1,11 @@
-package service.impl;
+package com.barber.service.impl;
 
-import dao.MemberUser;
+import com.barber.dao.MemberUser;
 import lombok.extern.slf4j.Slf4j;
-import mapper.MemberUserMapper;
+import com.barber.mapper.MemberUserMapper;
 import org.springblade.core.mp.base.BaseServiceImpl;
 import org.springframework.stereotype.Service;
-import service.MemberUserService;
+import com.barber.service.MemberUserService;
 
 /**
  * @author will

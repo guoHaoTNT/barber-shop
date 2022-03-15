@@ -1,7 +1,7 @@
-package service;
+package com.barber.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import dao.Rechargeable;
+import com.barber.dao.Rechargeable;
 
 /**
  * @author will

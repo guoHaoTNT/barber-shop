@@ -1,11 +1,11 @@
-package service.impl;
+package com.barber.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import dao.Rechargeable;
+import com.barber.dao.Rechargeable;
 import lombok.extern.slf4j.Slf4j;
-import mapper.RechargeableMapper;
+import com.barber.mapper.RechargeableMapper;
 import org.springframework.stereotype.Service;
-import service.RechargeableService;
+import com.barber.service.RechargeableService;
 
 /**
  * @author will

@@ -1,10 +1,14 @@
+package com.barber;
+
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author will
  */
-@SpringCloudApplication
+@SpringBootApplication()
+@MapperScan("com.barber.mapper")
 public class HaircutApplication {
     public static void main(String[] args) {
         SpringApplication.run(HaircutApplication.class,args);

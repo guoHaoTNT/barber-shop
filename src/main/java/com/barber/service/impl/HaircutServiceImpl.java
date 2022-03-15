@@ -1,11 +1,11 @@
-package service.impl;
+package com.barber.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import dao.Haircut;
+import com.barber.dao.Haircut;
 import lombok.extern.slf4j.Slf4j;
-import mapper.HaircutMapper;
+import com.barber.mapper.HaircutMapper;
 import org.springframework.stereotype.Service;
-import service.HaircutService;
+import com.barber.service.HaircutService;
 
 /**
  * @author will

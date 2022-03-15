@@ -1,6 +1,6 @@
-package vo;
+package com.barber.vo;
 
-import dao.Haircut;
+import com.barber.dao.Haircut;
 import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Data;

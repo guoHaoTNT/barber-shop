@@ -1,7 +1,7 @@
-package mapper;
+package com.barber.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import dao.Rechargeable;
+import com.barber.dao.Rechargeable;
 
 /**
  * @author will

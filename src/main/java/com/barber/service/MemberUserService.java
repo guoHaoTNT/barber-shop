@@ -1,6 +1,6 @@
-package service;
+package com.barber.service;
 
-import dao.MemberUser;
+import com.barber.dao.MemberUser;
 import org.springblade.core.mp.base.BaseService;
 
 /**

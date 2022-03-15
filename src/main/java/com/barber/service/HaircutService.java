@@ -1,7 +1,7 @@
-package service;
+package com.barber.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import dao.Haircut;
+import com.barber.dao.Haircut;
 
 /**
  * 剪发卡
