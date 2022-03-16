@@ -10,5 +10,8 @@
         <module name="barber-shop" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="barber-service" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

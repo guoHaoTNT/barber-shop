@@ -12,7 +12,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.springblade.core.mp.base.BaseEntity;
 
 import static com.baomidou.mybatisplus.annotation.FieldStrategy.IGNORED;
 import static com.baomidou.mybatisplus.annotation.FieldStrategy.NOT_EMPTY;

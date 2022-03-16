@@ -1,6 +1,8 @@
 package com.barber.controller;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.barber.dao.MemberUser;
 import com.barber.service.MemberUserService;
 import io.swagger.annotations.Api;
@@ -8,8 +10,6 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springblade.core.tool.api.R;
-import org.springblade.core.tool.utils.Func;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,10 +36,9 @@ public class MemberUserController {
     @GetMapping("/rechargeInfoByPhoneNum/{name}/{phone_num}")
     public R<List<MemberUser>> queryByName(@PathVariable("name") String name, @PathVariable("phone_num") Integer phoneNum) {
         List<MemberUser> list = memberUserService.list(Wrappers.<MemberUser>lambdaQuery()
-                .like(Func.isNotEmpty(name), MemberUser::getMemberUserName, name)
-                .like(Func.isNotEmpty(phoneNum), MemberUser::getPhoneNum, phoneNum));
-
-        return R.data(list);
+                .like(ObjectUtil.isNotEmpty(name), MemberUser::getMemberUserName, name)
+                .like(ObjectUtil.isNotEmpty(phoneNum), MemberUser::getPhoneNum, phoneNum));
+        return R.ok(list);
     }
 
     /**
@@ -55,10 +54,10 @@ public class MemberUserController {
         List<MemberUser> list = memberUserService.list(Wrappers.<MemberUser>lambdaQuery()
                 .eq(MemberUser::getPhoneNum, memberUser.getPhoneNum()));
         if (list.size() > 0) {
-            return R.fail("该手机号已经绑定会员，请检查后再次输入");
+            return R.failed("该手机号已经绑定会员，请检查后再次输入");
         }
         memberUserService.saveOrUpdate(memberUser);
-        return R.data(memberUser.getId().toString());
+        return R.ok(memberUser.getId().toString());
     }
 
     /**
@@ -72,7 +71,7 @@ public class MemberUserController {
     public R<MemberUser> queryByPhone(@PathVariable("phone_num") Integer phoneNum) {
         MemberUser memberUser = memberUserService.getOne(Wrappers.<MemberUser>lambdaQuery()
                 .eq(MemberUser::getPhoneNum, phoneNum));
-        return R.data(memberUser);
+        return R.ok(memberUser);
     }
 
     /**
@@ -85,7 +84,7 @@ public class MemberUserController {
     @DeleteMapping("/delMemBerUser/{id}")
     public R<Boolean> delMemBerUser(@PathVariable("id") Long id) {
         boolean b = memberUserService.removeById(id);
-        return R.data(b);
+        return R.ok(b);
     }
 
 }

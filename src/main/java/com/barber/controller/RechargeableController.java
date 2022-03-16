@@ -1,15 +1,15 @@
 package com.barber.controller;
 
 
+import com.baomidou.mybatisplus.extension.api.R;
 import com.barber.dao.Rechargeable;
+import com.barber.service.RechargeableService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springblade.core.tool.api.R;
 import org.springframework.web.bind.annotation.*;
-import com.barber.service.RechargeableService;
 
 import java.util.List;
 
@@ -29,14 +29,14 @@ public class RechargeableController {
     @PostMapping("/save")
     public R<String> save(@RequestBody Rechargeable rechargeable){
         rechargeableService.save(rechargeable);
-        return R.data(rechargeable.getId().toString());
+        return R.ok(rechargeable.getId().toString());
     }
 
     @ApiModelProperty("根据手机号查询")
     @GetMapping()
     public R<List<Rechargeable>> query(){
 
-        return R.data(null);
+        return R.ok(null);
     }
 
 }
