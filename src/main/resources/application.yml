@@ -1,9 +1,5 @@
 spring:
   application:
-    name: service-barber
+    name: service-item
   profiles:
     active: dev
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
