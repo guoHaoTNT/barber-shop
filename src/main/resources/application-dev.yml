@@ -1,16 +1,14 @@
 server:
-  port: 8206
-
+  port: 8222
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath:com/barber/mapper/*.xml # 编写复杂的sql 语句 ，mybatis-plus 对多表关联支持性差。手写xml文件{sql语句}
-
+  mapper-locations: classpath:com/barber/mapper/xml/*.xml
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/baber_shop?characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/barber_shop?characterEncoding=utf-8&useSSL=false
     username: root
     password: root
     hikari:
@@ -26,4 +24,3 @@ spring:
     time-zone: GMT+8
 swagger2:
   enable: true
-
