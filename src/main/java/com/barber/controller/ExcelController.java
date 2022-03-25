@@ -24,7 +24,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Api(value = "excel表格导入导出", tags = "excel表格导入导出")
 public class ExcelController {
-    @Autowired
+
     private final ExcelService excelService;
 
     /**
