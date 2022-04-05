@@ -42,7 +42,7 @@ public class Rechargeable extends BaseEntity {
     private String memberUserName;
 
     @ApiModelProperty(value = "会员手机号")
-    private Integer phoneNum;
+    private String phoneNum;
 
 
     @ApiModelProperty(value = "充值金额")

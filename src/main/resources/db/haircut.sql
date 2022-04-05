@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50728
 File Encoding         : 65001
 
-Date: 2022-03-16 00:04:15
+Date: 2022-04-05 22:30:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,7 @@ CREATE TABLE `haircut` (
   `id` bigint(64) unsigned NOT NULL COMMENT '主键',
   `member_user_id` bigint(64) DEFAULT NULL COMMENT '会员管理系统',
   `member_user_name` varchar(255) DEFAULT NULL COMMENT '会员姓名',
-  `phone_num` int(11) DEFAULT NULL COMMENT '会员手机号',
+  `phone_num` varchar(11) DEFAULT NULL COMMENT '会员手机号',
   `haircut_recharge_amount` double(255,0) DEFAULT NULL COMMENT '剪发卡充值金额',
   `total_time` int(11) DEFAULT NULL COMMENT '剪发总次数',
   `remaining_time` int(11) DEFAULT NULL COMMENT '剩余剪发总次数',

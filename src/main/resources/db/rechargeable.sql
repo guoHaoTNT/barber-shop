@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50728
 File Encoding         : 65001
 
-Date: 2022-03-16 00:04:46
+Date: 2022-04-05 22:31:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,7 @@ CREATE TABLE `rechargeable` (
   `id` bigint(64) unsigned NOT NULL COMMENT '主键',
   `member_user_id` bigint(64) DEFAULT NULL COMMENT '会员管理系统',
   `member_user_name` varchar(255) DEFAULT NULL COMMENT '会员姓名',
-  `phone_num` int(11) DEFAULT NULL COMMENT '会员手机号',
+  `phone_num` varchar(11) DEFAULT NULL COMMENT '会员手机号',
   `recharge_amount` double(255,0) DEFAULT NULL COMMENT '充值金额',
   `remaining_amount` double(255,0) DEFAULT NULL COMMENT '剩余金额',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',

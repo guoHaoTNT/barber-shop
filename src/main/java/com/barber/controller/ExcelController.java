@@ -2,6 +2,7 @@ package com.barber.controller;
 
 import com.baomidou.mybatisplus.extension.api.R;
 import com.barber.excel.HaircutListener;
+import com.barber.excel.MemberUserListener;
 import com.barber.service.ExcelService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,13 +29,23 @@ public class ExcelController {
     private final ExcelService excelService;
 
     /**
-     * 费率表导入
-     * 表头需要是五行，数据从第六行开始
+     * 会员导入
      */
-    @PostMapping("/import")
-    @ApiOperation(value = "首次费率表导入", notes = "首次费率表导入")
-    public R<Map<String, Object>> importPolicy(MultipartFile file){
-        Map<String, Object> result  = excelService.cacheImportPolicy(file,new HaircutListener());
+    @PostMapping("/import/memberUser")
+    @ApiOperation(value = "会员导入", notes = "会员导入")
+    public R<Map<String, Object>> importMemberUser(MultipartFile file){
+        Map<String, Object> result  = excelService.cacheImportMemberUser(file,new MemberUserListener());
+        Object exceptionMsg = result.get("exceptionMsg");
+        return null == result.get("exceptionMsg") ? R.ok(result) : R.failed(exceptionMsg.toString());
+    }
+
+    /**
+     * 剪发卡读入
+     */
+    @PostMapping("/import/haircut")
+    @ApiOperation(value = "剪发卡读入", notes = "剪发卡读入")
+    public R<Map<String, Object>> importHaircut(MultipartFile file){
+        Map<String, Object> result  = excelService.cacheImportHaircut(file,new HaircutListener());
         Object exceptionMsg = result.get("exceptionMsg");
         return null == result.get("exceptionMsg") ? R.ok(result) : R.failed(exceptionMsg.toString());
     }

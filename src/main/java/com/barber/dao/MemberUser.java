@@ -22,7 +22,7 @@ import java.util.Date;
 @Builder
 @ApiModel(description = "会员表")
 @EqualsAndHashCode(callSuper = true)
-@TableName("memberUser")
+@TableName("member_user")
 public class MemberUser extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
@@ -36,7 +36,7 @@ public class MemberUser extends BaseEntity {
     private String memberUserName;
 
     @ApiModelProperty(value = "会员手机号")
-    private Integer phoneNum;
+    private String phoneNum;
 
     @ApiModelProperty(value = "生日")
     private Date birthday;

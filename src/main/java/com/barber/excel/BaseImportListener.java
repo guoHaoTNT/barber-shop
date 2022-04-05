@@ -150,7 +150,7 @@ public abstract class BaseImportListener<E> extends ModelBuildEventListener {
 	 * @return 表头行数
 	 */
 	protected int headRowNumber() {
-		return 5;
+		return 1;
 	}
 
 	protected void addWarningPrompts(String prompt) {
