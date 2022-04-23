@@ -1,8 +1,11 @@
 package com.barber.controller;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.api.R;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.barber.common.RetVal;
 import com.barber.dao.MemberUser;
 import com.barber.service.MemberUserService;
 import io.swagger.annotations.Api;
@@ -22,9 +25,20 @@ import java.util.List;
 @RequestMapping("/haircut")
 @AllArgsConstructor
 @Api(value = "会员管理系统", tags = "会员管理")
+@CrossOrigin
 public class MemberUserController {
 
     private final MemberUserService memberUserService;
+
+    @ApiModelProperty(value = "查询会员列表信息")
+    @GetMapping("/list/{pageNum}/{pageSize}")
+    public RetVal queryHaircutList(@PathVariable("pageNum") Long pageNum,
+                                                       @PathVariable("pageSize") Long pageSize,
+                                                       MemberUser memberUser){
+        Page<MemberUser> memberUserPage = new Page<>(pageNum, pageSize);
+        IPage<MemberUser> spuInfoIPage = memberUserService.queryHaircutList(memberUserPage,memberUser);
+        return RetVal.success().data("userList",spuInfoIPage);
+    }
 
     /**
      * 会员卡，手机号和姓名模糊查询

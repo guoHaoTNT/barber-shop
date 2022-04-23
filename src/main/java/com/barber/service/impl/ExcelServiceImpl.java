@@ -66,9 +66,10 @@ public class ExcelServiceImpl implements ExcelService {
                 //将导入的数据进行赋值
                 ArrayList<MemberUser> users = new ArrayList<>();
                 for (MemberUserImport memberUserImport : list) {
-                    users.add(MemberUser.builder().memberUserName(memberUserImport.getMemberUserName())
-                            .phoneNum(memberUserImport.getPhoneNum())
-                            .build());
+                    MemberUser memberUser = new MemberUser();
+                    memberUser.setMemberUserName(memberUserImport.getMemberUserName());
+                    memberUser.setPhoneNum(memberUserImport.getPhoneNum());
+                    users.add(memberUser);
                 }
                 memberUserService.saveBatch(users);
             }

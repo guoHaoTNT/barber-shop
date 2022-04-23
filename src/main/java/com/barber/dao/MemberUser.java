@@ -19,7 +19,6 @@ import java.util.Date;
  * @author will
  */
 @Data
-@Builder
 @ApiModel(description = "会员表")
 @EqualsAndHashCode(callSuper = true)
 @TableName("member_user")
