@@ -58,7 +58,7 @@ public enum ResultCode  implements IResultCode{
      */
     PARAM_VALID_ERROR(400, "参数校验失败");
 
-    final int code;
+    public final int code;
     final String message;
 
     @Override
