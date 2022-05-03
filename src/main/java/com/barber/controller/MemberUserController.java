@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.barber.common.Result;
 import com.barber.common.RetVal;
 import com.barber.dao.MemberUser;
 import com.barber.service.MemberUserService;
@@ -37,7 +38,8 @@ public class MemberUserController {
                                                        MemberUser memberUser){
         Page<MemberUser> memberUserPage = new Page<>(pageNum, pageSize);
         IPage<MemberUser> spuInfoIPage = memberUserService.queryHaircutList(memberUserPage,memberUser);
-        return RetVal.success().data("userList",spuInfoIPage);
+        long total = spuInfoIPage.getTotal();
+        return RetVal.success().data("total",total).data("userList",spuInfoIPage);
     }
 
     /**
@@ -63,15 +65,17 @@ public class MemberUserController {
      */
     @ApiModelProperty(value = "会员保存")
     @PostMapping("/save")
-    public R<String> save(@RequestBody MemberUser memberUser) {
-        //手机号是唯一标识校验
-        List<MemberUser> list = memberUserService.list(Wrappers.<MemberUser>lambdaQuery()
-                .eq(MemberUser::getPhoneNum, memberUser.getPhoneNum()));
-        if (list.size() > 0) {
-            return R.failed("该手机号已经绑定会员，请检查后再次输入");
+    public Result<String> save(MemberUser memberUser) {
+        if (ObjectUtil.isEmpty(memberUser.getId())){
+            //手机号是唯一标识校验
+            List<MemberUser> list = memberUserService.list(Wrappers.<MemberUser>lambdaQuery()
+                    .eq(MemberUser::getPhoneNum, memberUser.getPhoneNum()));
+            if (list.size() > 0) {
+                return Result.fail("该手机号已经绑定会员，请检查后再次输入");
+            }
         }
         memberUserService.saveOrUpdate(memberUser);
-        return R.ok(memberUser.getId().toString());
+        return Result.success("保存成功");
     }
 
     /**
@@ -96,9 +100,15 @@ public class MemberUserController {
      */
     @ApiModelProperty(value = "会员删除")
     @DeleteMapping("/delMemBerUser/{id}")
-    public R<Boolean> delMemBerUser(@PathVariable("id") Long id) {
+    public RetVal delMemBerUser(@PathVariable("id") Long id) {
         boolean b = memberUserService.removeById(id);
-        return R.ok(b);
+        return RetVal.success();
     }
 
+    @ApiModelProperty(value = "根据id查询会员信息")
+    @GetMapping("/queryUserById/{id}")
+    public RetVal queryUserById(@PathVariable("id") Long id) {
+        MemberUser memberUser = memberUserService.getById(id);
+        return RetVal.success().data("userCondition",memberUser);
+    }
 }

@@ -8,7 +8,7 @@ public enum ResultCode  implements IResultCode{
     /**
      * 操作成功
      */
-    SUCCESS(200, "操作成功"),
+    SUCCESS(20000, "操作成功"),
     /**
      * 业务异常
      */

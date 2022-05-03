@@ -75,7 +75,7 @@ public class Result<T> implements Serializable {
     }
 
     public static <T> Result<T> data(T data, String msg) {
-        return data(200, data, msg);
+        return data(20000, data, msg);
     }
 
     public static <T> Result<T> data(int code, T data, String msg) {
