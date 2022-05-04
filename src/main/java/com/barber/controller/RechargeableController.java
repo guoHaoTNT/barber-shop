@@ -21,6 +21,7 @@ import java.util.List;
 @RequestMapping("/rechargeable")
 @AllArgsConstructor
 @Api(value = "充值卡信息管理", tags = "充值卡")
+@CrossOrigin
 public class RechargeableController {
 
     private final RechargeableService rechargeableService;

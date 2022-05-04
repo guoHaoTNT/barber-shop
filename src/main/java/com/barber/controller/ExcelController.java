@@ -18,6 +18,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +42,7 @@ import static org.apache.commons.codec.Charsets.UTF_8;
 @RequestMapping("/excel")
 @AllArgsConstructor
 @Api(value = "excel表格导入导出", tags = "excel表格导入导出")
+@CrossOrigin
 public class ExcelController {
 
     private final ExcelService excelService;

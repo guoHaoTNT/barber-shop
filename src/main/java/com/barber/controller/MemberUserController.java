@@ -23,7 +23,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/haircut")
+@RequestMapping("/memberUser")
 @AllArgsConstructor
 @Api(value = "会员管理系统", tags = "会员管理")
 @CrossOrigin
@@ -33,7 +33,7 @@ public class MemberUserController {
 
     @ApiModelProperty(value = "查询会员列表信息")
     @GetMapping("/list/{pageNum}/{pageSize}")
-    public RetVal queryHaircutList(@PathVariable("pageNum") Long pageNum,
+    public RetVal queryMemberUserList(@PathVariable("pageNum") Long pageNum,
                                                        @PathVariable("pageSize") Long pageSize,
                                                        MemberUser memberUser){
         Page<MemberUser> memberUserPage = new Page<>(pageNum, pageSize);
