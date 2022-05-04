@@ -20,7 +20,6 @@ import static com.baomidou.mybatisplus.annotation.FieldStrategy.NOT_EMPTY;
  * @author will
  */
 @Data
-@Builder
 @ApiModel(description = "充值卡")
 @EqualsAndHashCode(callSuper = true)
 @TableName("rechargeable")

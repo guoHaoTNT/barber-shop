@@ -1,14 +1,18 @@
 package com.barber.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.extra.cglib.CglibUtil;
 import com.alibaba.excel.read.builder.ExcelReaderBuilder;
+import com.barber.dao.Haircut;
 import com.barber.dao.MemberUser;
+import com.barber.excel.HaircutImport;
 import com.barber.excel.HaircutListener;
 import com.barber.excel.MemberUserImport;
 import com.barber.excel.MemberUserListener;
 import com.barber.service.ExcelService;
+import com.barber.service.HaircutService;
 import com.barber.service.MemberUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,11 +40,49 @@ public class ExcelServiceImpl implements ExcelService {
 
     @Autowired
     private MemberUserService memberUserService;
+    @Autowired
+    private HaircutService haircutService;
 
     @Override
     public Map<String, Object> cacheImportHaircut(MultipartFile file, HaircutListener importListener) {
-
-        return null;
+        Map<String, Object> result = new HashMap<>(6);
+        String filename = file.getOriginalFilename();
+        if (isEmpty(filename)) {
+            result.put("exceptionMsg", "请上传文件!");
+            return result;
+        }
+        boolean check = !endsWithIgnoreCase(filename, ".xls") && !endsWithIgnoreCase(filename, ".xlsx");
+        if (check) {
+            result.put("exceptionMsg", "请上传正确的excel文件!");
+            return result;
+        }
+        InputStream inputStream;
+        try {
+            inputStream = new BufferedInputStream(file.getInputStream());
+            ExcelReaderBuilder builder = read(inputStream, importListener).headRowNumber(1);
+            builder.doReadAll();
+            if (importListener.isSuccess()) {
+                List<HaircutImport> list = importListener.getList();
+                //将导入的数据进行赋值
+                ArrayList<Haircut> haircuts = new ArrayList<>();
+                for (HaircutImport haircutImport : list) {
+                    Haircut haircut = new Haircut();
+                    BeanUtil.copyProperties(haircutImport,haircut);
+                    haircuts.add(haircut);
+                }
+                haircutService.saveBatch(haircuts);
+            }
+            result.put("successCount", importListener.getSuccessCount());
+            result.put("errorCount", importListener.getErrorCount());
+            result.put("warningPrompts", importListener.getWarningPrompts());
+            result.put("errorPrompts", importListener.getErrorPrompts());
+            result.put("exceptionMsg", importListener.getExceptionMsg());
+        } catch (IOException e) {
+            e.printStackTrace();
+            result.put("exceptionMsg", "上传失败!");
+            return result;
+        }
+        return result;
     }
 
     @Override
