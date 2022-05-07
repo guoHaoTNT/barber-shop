@@ -7,6 +7,7 @@ import com.barber.dao.MemberUser;
 import com.barber.excel.HaircutListener;
 import com.barber.excel.MemberUserExport;
 import com.barber.excel.MemberUserListener;
+import com.barber.excel.RechargeableListener;
 import com.barber.service.ExcelService;
 import com.barber.service.MemberUserService;
 import io.swagger.annotations.Api;
@@ -63,6 +64,17 @@ public class ExcelController {
     @ApiOperation(value = "剪发卡读入", notes = "剪发卡读入")
     public R<Map<String, Object>> importHaircut(MultipartFile file) {
         Map<String, Object> result = excelService.cacheImportHaircut(file, new HaircutListener());
+        Object exceptionMsg = result.get("exceptionMsg");
+        return null == result.get("exceptionMsg") ? R.ok(result) : R.failed(exceptionMsg.toString());
+    }
+
+    /**
+     *  充值卡读入
+     */
+    @PostMapping("/import/rechargeable")
+    @ApiOperation(value = "剪发卡读入", notes = "剪发卡读入")
+    public R<Map<String, Object>> importRechargeable(MultipartFile file) {
+        Map<String, Object> result = excelService.cacheImportRechargeable(file, new RechargeableListener());
         Object exceptionMsg = result.get("exceptionMsg");
         return null == result.get("exceptionMsg") ? R.ok(result) : R.failed(exceptionMsg.toString());
     }

@@ -7,10 +7,7 @@ import cn.hutool.extra.cglib.CglibUtil;
 import com.alibaba.excel.read.builder.ExcelReaderBuilder;
 import com.barber.dao.Haircut;
 import com.barber.dao.MemberUser;
-import com.barber.excel.HaircutImport;
-import com.barber.excel.HaircutListener;
-import com.barber.excel.MemberUserImport;
-import com.barber.excel.MemberUserListener;
+import com.barber.excel.*;
 import com.barber.service.ExcelService;
 import com.barber.service.HaircutService;
 import com.barber.service.MemberUserService;
@@ -126,5 +123,10 @@ public class ExcelServiceImpl implements ExcelService {
             return result;
         }
         return result;
+    }
+
+    @Override
+    public Map<String, Object> cacheImportRechargeable(MultipartFile file, RechargeableListener rechargeableListener) {
+        return null;
     }
 }
