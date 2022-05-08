@@ -54,6 +54,7 @@ public class ExcelController {
     public R<Map<String, Object>> importMemberUser(MultipartFile file) {
         Map<String, Object> result = excelService.cacheImportMemberUser(file, new MemberUserListener());
         Object exceptionMsg = result.get("exceptionMsg");
+
         return null == result.get("exceptionMsg") ? R.ok(result) : R.failed(exceptionMsg.toString());
     }
 
